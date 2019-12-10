@@ -1,0 +1,67 @@
+<form (ngSubmit)="registrar()">
+    <input type="text" placeholder="Codigo" name="codigo" [(ngModel)]="geografia.codigo">
+    <input type="text" placeholder="Descripcion" name="descripcion" [(ngModel)]="geografia.descripcion">
+    <select (change)="selecionado($event)" name="tipo" [(ngModel)]="geografia.tipo">
+        <option *ngFor="let dato of datosT">{{dato.codigo}} - {{dato.descripcion}}</option>
+    </select>
+    <select (change)="selecionado($event)" name="padre" [(ngModel)]="geografia.padre">
+        <option *ngFor="let dato of datos">{{dato.codigo}} - {{dato.descripcion}}</option>
+    </select>
+    <!-- <input type="text" placeholder="Padre" name="padre" [(ngModel)]="geografia.padre"> -->
+    <button type="submit">Registrar</button>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descripcion</th>
+            <th>Tipo</th>
+            <th>Padre</th>
+            <th>aciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dato of datos">
+            <td>{{dato.codigo}}</td>
+            <td>{{dato.descripcion}}</td>
+            <td>{{dato.tipo}}</td>
+            <td>{{dato.padre}}</td>
+            <td><button (click)="editar(dato)" data-toggle="modal"
+                    data-target="#exampleModal">editar</button><br><button
+                    (click)="eliminarTipo(dato)">eliminar</button></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="editaGeo()">
+                        <input type="text" placeholder="Codigo" name="codigo" [(ngModel)]="editGeografia.codigo">
+                        <input type="text" placeholder="Descripcion" name="descripcion" [(ngModel)]="editGeografia.descripcion">
+                        <select (change)="selecionado($event)" name="tipo" [(ngModel)]="editGeografia.tipo">
+                            <option *ngFor="let dato of datosT">{{dato.codigo}} - {{dato.descripcion}}</option>
+                        </select>
+                        <select (change)="selecionadoP($event)" name="padre" [(ngModel)]="editGeografia.padre">
+                            <option *ngFor="let dato of datos">{{dato.codigo}} - {{dato.descripcion}}</option>
+                        </select>
+                    <div class="modal-footer">
+                        <button type="submit">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

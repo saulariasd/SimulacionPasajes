@@ -1,0 +1,53 @@
+<form (ngSubmit)="registrar()">
+    <input type="text" placeholder="Codigo" name="codigo" [(ngModel)]="tipo.codigo">
+    <input type="text" placeholder="Descripcion" name="descripcion" [(ngModel)]="tipo.descripcion">
+    <button type="submit">Registrar</button>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descripcion</th>
+            <th>aciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dato of datos">
+            <td>{{dato.codigo}}</td>
+            <td>{{dato.descripcion}}</td>
+            <td><button (click)="editar(dato)" data-toggle="modal"
+                    data-target="#exampleModal">editar</button><br><button
+                    (click)="eliminarTipo(dato)">eliminar</button></td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="editaTipo()">
+                    <input type="text" placeholder="Codigo" name="codigo" [(ngModel)]="editTipo.codigo">
+                    <input type="text" placeholder="Descripcion" name="descripcion" [(ngModel)]="editTipo.descripcion">
+                    <div class="modal-footer">
+                        <button type="submit">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <select (change)="selecionado($event)">
+    <option *ngFor="let dato of datos">{{dato.codigo}} - {{dato.descripcion}}</option>
+</select> -->

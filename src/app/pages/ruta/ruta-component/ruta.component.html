@@ -1,0 +1,105 @@
+<!-- <p>ruta works!</p> -->
+<form (ngSubmit)="registrar()">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-4">
+                <input type="text" class="form-control" placeholder="Codigo" name="codigo" [(ngModel)]="ruta.codigo">
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control" placeholder="Descripcion" name="descripcion"
+                    [(ngModel)]="ruta.descripcion">
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-2"></div>
+            <div class="col-3">
+                <select (change)="selecionadoGO($event)" name="origen" class="form-control" [(ngModel)]="ruta.origen">
+                    <option *ngFor="let dato of datosG">{{dato.codigo}} - {{dato.descripcion}}</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <select (change)="selecionadoGD($event)" name="destino" class="form-control" [(ngModel)]="ruta.destino">
+                    <option *ngFor="let dato of datosG">{{dato.codigo}} - {{dato.descripcion}}</option>
+                </select>
+            </div>
+            <div class="col-3">
+                <input type="number" class="form-control" placeholder="Valor Minimo" name="valorMinimo"
+                    [(ngModel)]="ruta.valorMinimo">
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <!-- <input type="text" placeholder="Padre" name="padre" [(ngModel)]="geografia.padre"> -->
+        <br>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <button type="submit" class="btn btn-success btn-lg btn-block">Registrar</button>
+            </div>
+            <div class="col-4"></div>
+        </div>
+
+    </div>
+</form>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Origen</th>
+            <th scope="col">Destino</th>
+            <th scope="col">Valor Minimo</th>
+            <th scope="col">aciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dato of datos">
+            <td>{{dato.codigo}}</td>
+            <td>{{dato.descripcion}}</td>
+            <td>{{dato.origen}}</td>
+            <td>{{dato.destino}}</td>
+            <td>{{dato.valorMinimo}}</td>
+            <td><button (click)="editar(dato)" data-toggle="modal" data-target="#exampleModal"
+                    class="btn btn-primary">editar</button><br><button (click)="eliminarRuta(dato)"
+                    class="btn btn-danger">eliminar</button></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="editaRuta()">
+                    <input type="text" placeholder="Codigo" name="codigo" [(ngModel)]="editRuta.codigo">
+                    <input type="text" placeholder="Descripcion" name="descripcion" [(ngModel)]="editRuta.descripcion">
+                    <select (change)="selecionadoGO($event)" name="origen" [(ngModel)]="editRuta.origen">
+                        <option *ngFor="let dato of datosG">{{dato.codigo}} - {{dato.descripcion}}</option>
+                    </select>
+                    <select (change)="selecionadoGD($event)" name="destino" [(ngModel)]="editRuta.destino">
+                        <option *ngFor="let dato of datosG">{{dato.codigo}} - {{dato.descripcion}}</option>
+                    </select>
+                    <input type="number" placeholder="Valor Minimo" name="valorMinimo"
+                        [(ngModel)]="editRuta.valorMinimo">
+                    <!-- <input type="text" placeholder="Padre" name="padre" [(ngModel)]="geografia.padre"> -->
+                    <div class="modal-footer">
+                        <button type="submit">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
